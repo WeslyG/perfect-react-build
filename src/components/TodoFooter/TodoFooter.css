@@ -1,0 +1,14 @@
+.todoFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  background-color: white;
+  border-top: 1px solid #e6e6e6;
+}
+
+.itemLeft {
+  width: 20%;
+  align-self: flex-start;
+}

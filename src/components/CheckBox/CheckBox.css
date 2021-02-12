@@ -1,0 +1,47 @@
+.checkBoxRound {
+  display: inline-block;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #e6e6e8;
+  height: 30px;
+  width: 30px;
+}
+
+.checkmark {
+  display: inline-block;
+  transform: rotate(36deg);
+  margin: -1px 0 -6px 7px;
+  height: 100%;
+  width: 100%;
+}
+
+.checkBoxGreenBorder {
+  border: 1px solid #63bead;
+}
+
+.showCheckBox {
+  visibility: visible;
+}
+
+.hideCheckBox {
+  visibility: hidden;
+}
+
+.checkmarkStem {
+  position: absolute;
+  width: 2px;
+  height: 19px;
+  background-color: #63bead;
+  left: 12px;
+  top: 10px;
+}
+
+.checkmarkKick {
+  position: absolute;
+  transform: rotate(10deg);
+  width: 9px;
+  height: 2px;
+  background-color: #63bead;
+  left: 5px;
+  top: 27px;
+}
