@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
+  target: 'web',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
