@@ -5,7 +5,7 @@ const initialState = {
   todos: [
     {
       id: 1,
-      title: 'buy a coffe',
+      title: 'buy a coffee',
       completed: false,
     },
     {

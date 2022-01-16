@@ -1,6 +1,7 @@
 import { TodoFooter } from './components/TodoFooter/TodoFooter';
 import { TodoAddForm } from './components/TodoAddForm/TodoAddForm';
 import { TodoList } from './components/TodoList/TodoList';
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import './AppStyle.css';
 
@@ -22,3 +23,5 @@ export function App(): JSX.Element {
     </div>
   );
 }
+
+export default module.hot ? hot(App) : App;

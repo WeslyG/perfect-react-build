@@ -6,9 +6,7 @@ module.exports = {
   entry: './src/index.tsx',
   target: 'web',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 3000,
+    port: 3003,
   },
   module: {
     rules: [
@@ -21,7 +19,6 @@ module.exports = {
             babelrc: true,
             compact: true,
             cacheDirectory: false,
-            sourceMaps: true,
           },
         },
       },
@@ -33,6 +30,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   output: {
     filename: 'bundle.js',
