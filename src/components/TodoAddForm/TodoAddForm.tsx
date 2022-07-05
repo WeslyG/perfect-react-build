@@ -39,9 +39,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDisapatchToProps = {
+const mapDispatchToProps = {
   addTodo,
   setAllTodoToggle,
 };
 
-export const TodoAddForm = connect(mapStateToProps, mapDisapatchToProps)(TodoAddFormComponent);
+export const TodoAddForm = connect(mapStateToProps, mapDispatchToProps)(TodoAddFormComponent);

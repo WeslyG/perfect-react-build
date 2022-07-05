@@ -13,7 +13,18 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+function saveToLocalStorage(state) {
+  try {
+    const serialisedState = JSON.stringify(state);
+    localStorage.setItem('store', serialisedState);
+  } catch (e) {
+    console.warn(e);
+  }
+}
+
 const store = createStore(rootReducer, composeEnhancers());
+
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 const root = document.getElementById('root');
 

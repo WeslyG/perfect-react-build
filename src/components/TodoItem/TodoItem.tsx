@@ -93,10 +93,10 @@ const TodoItemComponent: FC<TodoItemProps> = ({ todo, handleEditChange, handleDe
   );
 };
 
-const mapDisapatchToProps = {
+const mapDispatchToProps = {
   handleEditChange: editTodo,
   handleDelete: deleteTodo,
   handleComplete: setTodoCompleted,
 };
 
-export const TodoItem = connect(null, mapDisapatchToProps)(TodoItemComponent);
+export const TodoItem = connect(null, mapDispatchToProps)(TodoItemComponent);

@@ -16,7 +16,7 @@ export type TodoFooterProps = {
   completedCount: boolean;
 };
 
-export const TodoFooterComponent: FC<TodoFooterProps> = ({ todoItemsLeft, completedCount, completedClick }) => {
+export const TodoFooterComponent: FC<TodoFooterProps> = ({ todoItemsLeft }) => {
   return (
     <div className="todoFooter">
       <p className="itemLeft">{todoItemsLeft} item left</p>
@@ -33,8 +33,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDisapatchToProps = {
+const mapDispatchToProps = {
   completedClick,
 };
 
-export const TodoFooter = connect(mapStateToProps, mapDisapatchToProps)(TodoFooterComponent);
+export const TodoFooter = connect(mapStateToProps, mapDispatchToProps)(TodoFooterComponent);

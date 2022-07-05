@@ -1,20 +1,34 @@
 import { Todo } from '../App';
 import { ADD_TODO, COMPLETED_CLEAR, DELETE_TODO, EDIT_TODO, SET_ALL_TODO_TOGGLE, SET_TODO_COMPLETED } from './types';
 
-const initialState = {
-  todos: [
-    {
-      id: 1,
-      title: 'buy a coffee',
-      completed: false,
-    },
-    {
-      id: 2,
-      title: 'write code',
-      completed: false,
-    },
-  ],
+const isStoreExist = localStorage.getItem('store');
+
+const defaultStoreValue = {
+  filter: {
+    currentFilter: 'All',
+  },
+  app: {
+    todos: [
+      {
+        id: 1,
+        title: 'buy a coffee',
+        completed: false,
+      },
+      {
+        id: 2,
+        title: 'write code',
+        completed: false,
+      },
+    ],
+  },
 };
+
+const initStoreWithDefaultData = () => {
+  localStorage.setItem('store', JSON.stringify(defaultStoreValue));
+  return defaultStoreValue.app;
+};
+
+const initialState = isStoreExist ? JSON.parse(isStoreExist)['app'] : initStoreWithDefaultData();
 
 type Action = {
   type: string;
