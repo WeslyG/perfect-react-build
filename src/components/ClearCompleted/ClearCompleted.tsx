@@ -1,7 +1,10 @@
+import './ClearCompleted.css';
+
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import './ClearCompleted.css';
+
 import { completedClick } from '../../actions/filterActions';
+import { TodoState } from '../../reducers/todo';
 
 export type ClearCompletedProps = {
   completedCount: boolean;
@@ -14,14 +17,14 @@ export const ClearCompletedComponent: FC<ClearCompletedProps> = ({ completedCoun
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: TodoState) => {
   return {
-    completedCount: state.app.todos.filter((todo) => todo.completed).length > 0,
+    completedCount: state.app.todos.filter(todo => todo.completed).length > 0,
   };
 };
 
-const mapDisapatchToProps = {
+const mapDispatchToProps = {
   completedClick,
 };
 
-export const ClearCompleted = connect(mapStateToProps, mapDisapatchToProps)(ClearCompletedComponent);
+export const ClearCompleted = connect(mapStateToProps, mapDispatchToProps)(ClearCompletedComponent);

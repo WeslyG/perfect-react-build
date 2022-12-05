@@ -1,5 +1,15 @@
 import { Todo } from '../App';
-import { ADD_TODO, COMPLETED_CLEAR, DELETE_TODO, EDIT_TODO, SET_ALL_TODO_TOGGLE, SET_TODO_COMPLETED } from './types';
+import { FilterType } from '../components/TodoFooter/TodoFooter';
+import { isNotNull } from '../helpers/helper';
+import {
+  ADD_TODO,
+  ALL_ACTIONS,
+  COMPLETED_CLEAR,
+  DELETE_TODO,
+  EDIT_TODO,
+  SET_ALL_TODO_TOGGLE,
+  SET_TODO_COMPLETED,
+} from './types';
 
 const isStoreExist = localStorage.getItem('store');
 
@@ -23,15 +33,28 @@ const defaultStoreValue = {
   },
 };
 
-const initStoreWithDefaultData = () => {
+export interface AppState {
+  todos: Todo[];
+}
+
+export interface TodoState {
+  filter: {
+    currentFilter: FilterType;
+  };
+  app: {
+    todos: Todo[];
+  };
+}
+
+const initStoreWithDefaultData = (): AppState => {
   localStorage.setItem('store', JSON.stringify(defaultStoreValue));
   return defaultStoreValue.app;
 };
 
-const initialState = isStoreExist ? JSON.parse(isStoreExist)['app'] : initStoreWithDefaultData();
+const initialState = isStoreExist ? (JSON.parse(isStoreExist)['app'] as AppState) : initStoreWithDefaultData();
 
 type Action = {
-  type: string;
+  type: ALL_ACTIONS;
   todo?: Todo; // edit
   id?: number; // toggle, delete
   title?: string; // create
@@ -52,12 +75,11 @@ export function todoReducer(state = initialState, action: Action) {
       };
     case DELETE_TODO:
       return {
-        todos: [...state.todos.filter((todo) => todo.id !== action.id)],
+        todos: [...state.todos.filter(todo => todo.id !== action.id)],
       };
     case SET_TODO_COMPLETED:
-      // const index = state.todos.findIndex((x) => x.id === action.id);
       return {
-        todos: state.todos.map((todo) => {
+        todos: state.todos.map(todo => {
           if (todo.id === action.id) {
             return {
               ...todo,
@@ -66,19 +88,11 @@ export function todoReducer(state = initialState, action: Action) {
           }
           return todo;
         }),
-        // todos: [
-        //   ...state.todos.slice(0, index),
-        //   {
-        //     ...state.todos[index],
-        //     completed: !state.todos[index].completed,
-        //   },
-        //   ...state.todos.slice(index + 1),
-        // ],
       };
     case EDIT_TODO:
       return {
-        todos: state.todos.map((todoItem) => {
-          if (todoItem.id === action.todo.id) {
+        todos: state.todos.map(todoItem => {
+          if (todoItem.id === (isNotNull(action.todo) ? action.todo?.id : -1)) {
             return action.todo;
           }
           return todoItem;
@@ -87,14 +101,14 @@ export function todoReducer(state = initialState, action: Action) {
     case SET_ALL_TODO_TOGGLE:
       return {
         todos:
-          state.todos.length === state.todos.filter((todo) => todo.completed).length
-            ? state.todos.map((todo) => {
+          state.todos.length === state.todos.filter(todo => todo.completed).length
+            ? state.todos.map(todo => {
                 return {
                   ...todo,
                   completed: false,
                 };
               })
-            : state.todos.map((todo) => {
+            : state.todos.map(todo => {
                 return {
                   ...todo,
                   completed: true,

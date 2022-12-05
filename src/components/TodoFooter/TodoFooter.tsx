@@ -1,9 +1,12 @@
+import './TodoFooter.css';
+
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
+
+import { completedClick } from '../../actions/filterActions';
+import { TodoState } from '../../reducers/todo';
 import { ClearCompleted } from '../ClearCompleted/ClearCompleted';
 import { FilterButtons } from '../FilterButtons/FilterButtons';
-import './TodoFooter.css';
-import { completedClick } from '../../actions/filterActions';
 
 export enum FilterType {
   All = 'All',
@@ -26,10 +29,10 @@ export const TodoFooterComponent: FC<TodoFooterProps> = ({ todoItemsLeft }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: TodoState) => {
   return {
-    completedCount: state.app.todos.filter((todo) => todo.completed).length > 0,
-    todoItemsLeft: state.app.todos.filter((todo) => !todo.completed).length,
+    completedCount: state.app.todos.filter(todo => todo.completed).length > 0,
+    todoItemsLeft: state.app.todos.filter(todo => !todo.completed).length,
   };
 };
 

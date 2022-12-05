@@ -1,9 +1,12 @@
+import './TodoListStyle.css';
+
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
+
 import { Todo } from '../../App';
+import { TodoState } from '../../reducers/todo';
 import { FilterType } from '../TodoFooter/TodoFooter';
 import { TodoItem } from '../TodoItem/TodoItem';
-import './TodoListStyle.css';
 
 export type TodoListProps = {
   todos: Todo[];
@@ -14,9 +17,9 @@ export const TodoListComponent: FC<TodoListProps> = ({ todos, currentFilter }) =
   function todoFilter(currentFilter: FilterType) {
     switch (currentFilter) {
       case FilterType.Active:
-        return todos.filter((todo) => !todo.completed);
+        return todos.filter(todo => !todo.completed);
       case FilterType.Completed:
-        return todos.filter((todo) => todo.completed);
+        return todos.filter(todo => todo.completed);
       default:
         return todos;
     }
@@ -24,18 +27,18 @@ export const TodoListComponent: FC<TodoListProps> = ({ todos, currentFilter }) =
 
   return (
     <ul>
-      {todoFilter(currentFilter).map((todo) => {
+      {todoFilter(currentFilter).map(todo => {
         return <TodoItem todo={todo} key={todo.id} />;
       })}
     </ul>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: TodoState) => {
   return {
     todos: state.app.todos,
     currentFilter: state.filter.currentFilter,
   };
 };
 
-export const TodoList = connect(mapStateToProps, null)(TodoListComponent);
+export const TodoList = connect(mapStateToProps)(TodoListComponent);

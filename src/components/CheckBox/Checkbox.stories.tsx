@@ -1,14 +1,14 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { CheckBox, CheckBoxProps } from './CheckBox';
+import { CheckBox } from './CheckBox';
 
 export default {
   title: 'Base/CheckBox',
   component: CheckBox,
-} as Meta;
+} as ComponentMeta<typeof CheckBox>;
 
-const Template: Story<CheckBoxProps> = (args) => <CheckBox {...args} />;
+const Template: ComponentStory<typeof CheckBox> = args => <CheckBox {...args} />;
 
 export const Checked = Template.bind({});
 Checked.args = {

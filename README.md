@@ -12,8 +12,8 @@
 - typescript
 - babel 7 (core-js@3)
 - webpack 5
-- react 17
-- redux
+- react 18
+- reduxjs/toolkit
 - browserslist
 - eslint
 - prettier

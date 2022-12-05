@@ -1,8 +1,10 @@
-import React, { FC, useState } from 'react';
-import { connect } from 'react-redux';
 import './TodoAddFormStyle.css';
 
+import React, { FC, useState } from 'react';
+import { connect } from 'react-redux';
+
 import { addTodo, setAllTodoToggle } from '../../actions/todoActions';
+import { TodoState } from '../../reducers/todo';
 
 export type TodoAddFormProps = {
   toggleStatus: boolean;
@@ -33,9 +35,9 @@ export const TodoAddFormComponent: FC<TodoAddFormProps> = ({ toggleStatus, addTo
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: TodoState) => {
   return {
-    toggleStatus: state.app.todos.filter((todo) => todo.completed).length === state.app.todos.length,
+    toggleStatus: state.app.todos.filter(todo => todo.completed).length === state.app.todos.length,
   };
 };
 

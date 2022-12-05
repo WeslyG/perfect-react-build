@@ -1,20 +1,16 @@
-import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { Meta } from '@storybook/react/types-6-0';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React, { ReactNode } from 'react';
+import { Provider } from 'react-redux';
 
-import { FilterButtons, FilterButtonsProps } from './FilterButtons';
-import { FilterType } from '../TodoFooter/TodoFooter';
+import { store } from '../..';
+import { FilterButtons } from './FilterButtons';
 
 export default {
   title: 'Base/FilterButtons',
   component: FilterButtons,
-} as Meta;
+  decorators: [(story: () => ReactNode) => <Provider store={store}>{story()}</Provider>],
+} as ComponentMeta<typeof FilterButtons>;
 
-export const FilterButton = (args: FilterButtonsProps) => {
-  return <FilterButtons {...args} />;
-};
+const Template: ComponentStory<typeof FilterButtons> = args => <FilterButtons {...args} />;
 
-FilterButton.args = {
-  onClick: action('onClick'),
-  currentFilter: FilterType.All,
-};
+export const DefaultStory = Template.bind({});

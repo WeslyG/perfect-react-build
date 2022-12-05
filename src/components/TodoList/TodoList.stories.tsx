@@ -1,36 +1,16 @@
-import React, { FC } from 'react';
-import { Meta } from '@storybook/react/types-6-0';
-import { action } from '@storybook/addon-actions';
-import { TodoList, TodoListProps } from './TodoList';
-import { FilterType } from '../TodoFooter/TodoFooter';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React, { ReactNode } from 'react';
+import { Provider } from 'react-redux';
+
+import { store } from '../..';
+import { TodoList } from './TodoList';
 
 export default {
   title: 'App/TodoList',
   component: TodoList,
-} as Meta;
+  decorators: [(story: () => ReactNode) => <Provider store={store}>{story()}</Provider>],
+} as ComponentMeta<typeof TodoList>;
 
-export const TodoListSamples: FC<TodoListProps> = (args: TodoListProps) => (
-  <React.Fragment>
-    <TodoList
-      {...args}
-      todos={[
-        {
-          title: 'first element',
-          completed: true,
-          id: 3,
-        },
-        {
-          title: 'second element',
-          completed: false,
-          id: 2,
-        },
-      ]}
-    />
-  </React.Fragment>
-);
-TodoListSamples.args = {
-  currentFilter: FilterType.All,
-  handleEditChange: action('handleEditChange'),
-  handleDelete: action('handleDelete'),
-  handleToggle: action('handleToggle'),
-};
+const Template: ComponentStory<typeof TodoList> = args => <TodoList {...args} />;
+
+export const DefaultStory = Template.bind({});

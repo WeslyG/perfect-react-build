@@ -9,3 +9,14 @@ export const ADD_TODO = 'APP/ADD_TODO';
 export const DELETE_TODO = 'APP/DELETE_TODO';
 export const SET_TODO_COMPLETED = 'APP/SET_TODO_COMPLETED';
 export const EDIT_TODO = 'APP/EDIT_TODO';
+
+export type ALL_ACTIONS =
+  | typeof FILTER_ALL
+  | typeof FILTER_ACTIVE
+  | typeof FILTER_COMPLETE
+  | typeof COMPLETED_CLEAR
+  | typeof SET_ALL_TODO_TOGGLE
+  | typeof ADD_TODO
+  | typeof DELETE_TODO
+  | typeof SET_TODO_COMPLETED
+  | typeof EDIT_TODO;

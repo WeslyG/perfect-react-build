@@ -1,19 +1,17 @@
-import React, { FC } from 'react';
-import { Meta } from '@storybook/react/types-6-0';
-import { action } from '@storybook/addon-actions';
-import { TodoAddForm, TodoAddFormProps } from './TodoAddForm';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React, { ReactNode } from 'react';
+import { Provider } from 'react-redux';
+
+import { store } from '../..';
+import { FilterButtons } from '../FilterButtons/FilterButtons';
+import { TodoAddForm } from './TodoAddForm';
 
 export default {
   title: 'App/TodoAddFormComponent',
   component: TodoAddForm,
-} as Meta;
+  decorators: [(story: () => ReactNode) => <Provider store={store}>{story()}</Provider>],
+} as ComponentMeta<typeof FilterButtons>;
 
-export const TodoAddFormComponent: FC<TodoAddFormProps> = (args: TodoAddFormProps) => {
-  return <TodoAddForm {...args} />;
-};
+const Template: ComponentStory<typeof FilterButtons> = args => <TodoAddForm {...args} />;
 
-TodoAddFormComponent.args = {
-  toggleStatus: true,
-  onSetAllToggle: action('onSetAllToggle'),
-  onCreate: action('onCreate'),
-};
+export const DefaultStory = Template.bind({});

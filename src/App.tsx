@@ -1,9 +1,10 @@
-import { TodoFooter } from './components/TodoFooter/TodoFooter';
-import { TodoAddForm } from './components/TodoAddForm/TodoAddForm';
-import { TodoList } from './components/TodoList/TodoList';
-import { hot } from 'react-hot-loader/root';
-import React from 'react';
 import './AppStyle.css';
+
+import React from 'react';
+
+import { TodoAddForm } from './components/TodoAddForm/TodoAddForm';
+import { TodoFooter } from './components/TodoFooter/TodoFooter';
+import { TodoList } from './components/TodoList/TodoList';
 
 export type Todo = {
   id: number;
@@ -11,7 +12,7 @@ export type Todo = {
   completed: boolean;
 };
 
-export function App(): JSX.Element {
+export const App = (): JSX.Element => {
   return (
     <div className="todoApp">
       <h1>todos</h1>
@@ -22,6 +23,4 @@ export function App(): JSX.Element {
       </div>
     </div>
   );
-}
-
-export default module.hot ? hot(App) : App;
+};

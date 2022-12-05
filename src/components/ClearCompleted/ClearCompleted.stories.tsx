@@ -1,18 +1,16 @@
-import React from 'react';
-import { Meta } from '@storybook/react/types-6-0';
-import { ClearCompleted, ClearCompletedProps } from './ClearCompleted';
-import { action } from '@storybook/addon-actions';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React, { ReactNode } from 'react';
+import { Provider } from 'react-redux';
+
+import { store } from '../..';
+import { ClearCompleted } from './ClearCompleted';
 
 export default {
   title: 'Base/ClearCompleted',
   component: ClearCompleted,
-} as Meta;
+  decorators: [(story: () => ReactNode) => <Provider store={store}>{story()}</Provider>],
+} as ComponentMeta<typeof ClearCompleted>;
 
-export const ClearCompletedComponent = (args: ClearCompletedProps) => {
-  return <ClearCompleted {...args} />;
-};
+const Template: ComponentStory<typeof ClearCompleted> = args => <ClearCompleted {...args} />;
 
-ClearCompletedComponent.args = {
-  completedCount: true,
-  onClick: action('onClick'),
-};
+export const DefaultStory = Template.bind({});

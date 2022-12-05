@@ -1,9 +1,11 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
-import { CheckBox } from '../CheckBox/CheckBox';
-import { Todo } from '../../App';
 import './TodoItemStyle.css';
+
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
+
 import { deleteTodo, editTodo, setTodoCompleted } from '../../actions/todoActions';
+import { Todo } from '../../App';
+import { CheckBox } from '../CheckBox/CheckBox';
 
 export type TodoItemProps = {
   todo: Todo;
@@ -21,10 +23,10 @@ const TodoItemComponent: FC<TodoItemProps> = ({ todo, handleEditChange, handleDe
     setHoverState(state);
   };
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const onClickOutSide = (event) => {
-    if (inputRef.current && !inputRef.current.contains(event.target)) {
+  const onClickOutSide = (event: MouseEvent) => {
+    if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
       handleEditChange({
         ...todo,
         title: buffer,

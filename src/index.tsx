@@ -1,36 +1,32 @@
-import { compose, createStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+
 import { App } from './App';
+import { isNotNull } from './helpers/helper';
 import { rootReducer } from './reducers';
 
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-function saveToLocalStorage(state) {
+function saveToLocalStorage(state: unknown) {
   try {
-    const serialisedState = JSON.stringify(state);
-    localStorage.setItem('store', serialisedState);
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('store', serializedState);
   } catch (e) {
     console.warn(e);
   }
 }
 
-const store = createStore(rootReducer, composeEnhancers());
+export const store = configureStore({
+  reducer: rootReducer,
+});
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
 
-const root = document.getElementById('root');
+const rootElement = isNotNull(document.getElementById('root'));
+const root = createRoot(rootElement);
 
-render(
+root.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  root,
 );

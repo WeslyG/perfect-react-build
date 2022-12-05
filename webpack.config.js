@@ -16,7 +16,7 @@ if (process.env.BUILD_EXPECT) {
 
 const config = {
   entry: './src/index.tsx',
-  target: 'web',
+  target: 'browserslist',
   devServer: {
     port: 3003,
   },
@@ -50,11 +50,4 @@ const config = {
   plugins: pluginListArr,
 };
 
-module.exports = (env, args) => {
-  if (args.mode !== 'production') {
-    config.resolve.alias = {
-      'react-dom': '@hot-loader/react-dom',
-    };
-  }
-  return config;
-};
+module.exports = config;

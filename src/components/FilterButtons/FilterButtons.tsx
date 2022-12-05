@@ -1,8 +1,11 @@
+import './FilterButtons.css';
+
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import { FilterType } from '../TodoFooter/TodoFooter';
-import './FilterButtons.css';
+
 import { filterActive, filterAll, filterComplete } from '../../actions/filterActions';
+import { TodoState } from '../../reducers/todo';
+import { FilterType } from '../TodoFooter/TodoFooter';
 
 export type FilterButtonsProps = {
   currentFilter: FilterType;
@@ -27,7 +30,7 @@ const FilterButtonsComponent: FC<FilterButtonsProps> = ({ currentFilter, filterA
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: TodoState) => {
   return {
     currentFilter: state.filter.currentFilter,
   };
